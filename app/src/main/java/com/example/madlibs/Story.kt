@@ -16,15 +16,20 @@ class Story : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_story)
-        val inputs = intent.getStringArrayListExtra("inputs")
-        writer(inputs)
+        val inputs = intent.getStringArrayListExtra("inputs")  // get the entered words back
+        val storyID = intent.getIntExtra("storyID", 0) // get the id back
+        writer(inputs, storyID)
     }
 
-    fun writer(inputs: ArrayList<String>){
+    fun writer(inputs: ArrayList<String>, storyID: Int){
         val builder = StringBuilder()
-        val reader = Scanner(resources.openRawResource(R.raw.madlib1_tarzan))
+        val reader = Scanner(resources.openRawResource(storyID))
+
+        val first_line = reader.nextLine() // call the first line without adding space
+        builder.append(first_line)
         while(reader.hasNextLine()){
             val line = reader.nextLine()
+            builder.append(" ") // giving back the missing space between lines
             builder.append(line)
         }
 
@@ -42,7 +47,7 @@ class Story : AppCompatActivity() {
 
 
     fun makeNew(view: View){
-        val myIntent = Intent(this, Fillwords::class.java)
-        startActivity(myIntent) // jump to the story page
+        val myIntent = Intent(this, MainActivity::class.java)
+        startActivity(myIntent) // jump to the start page
     }
 }

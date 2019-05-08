@@ -15,7 +15,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/hints"
-            android:layout_marginTop="50sp"
+            android:layout_marginTop="20sp"
             android:id="@+id/new_words"/>
     <TextView
             android:layout_width="wrap_content"
@@ -26,14 +26,16 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_margin="40sp"
             android:textSize="30sp"
-            android:id="@+id/explain"/>
+            android:id="@+id/explain" android:paddingLeft="20sp" />
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="words left: 10"
+            android:text="words left: 0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/explain"
+            app:layout_constraintBottom_toTopOf="@+id/new_words"
+            android:layout_marginTop="20sp"
             android:textSize="20sp"
             android:id="@+id/hints"/>
     <Button
