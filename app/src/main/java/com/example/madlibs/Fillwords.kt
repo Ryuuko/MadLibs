@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_fillwords.*
 import kotlinx.android.synthetic.main.activity_story.*
 import java.nio.file.Files.find
@@ -28,6 +29,8 @@ class Fillwords : AppCompatActivity() {
         extract(story)
     }
 
+    // this function will search the word's types in the text and return the result in wordsType
+    // at last, it will get the type of required entered words to initialize
     fun extract(story: String){
         val builder = StringBuilder()
         // receive the story id
@@ -51,26 +54,31 @@ class Fillwords : AppCompatActivity() {
     }
 
     fun add_new_words(view: View){
-
-        val word = new_words.text.toString()
-        words.add(word)
-        counter--
-        new_words.setText(""); // clear the text bar whenever something is entered, recommand to be commented during debugging
-        if(counter >= 1){
-            val next_type = wordsType.get(wordsType.size - counter)
-            new_words.hint = "Please enter $next_type"
-            hints.text = "words left: $counter"
+        if(new_words.text.toString().equals("")){
+            val Toast = Toast.makeText(this, "Enter the word!", Toast.LENGTH_SHORT)
+            Toast.show()
         }
+        else{
+            val word = new_words.text.toString()
+            words.add(word)
+            counter--
+            new_words.setText(""); // clear the text bar whenever something is entered, recommand to be commented during debugging
+            if(counter >= 1){
+                val next_type = wordsType.get(wordsType.size - counter)
+                new_words.hint = "Please enter $next_type"
+                hints.text = "words left: $counter"
+            }
 
-        if(counter == 1)
-            enter.text = "FINISH!"
+            if(counter == 1)
+                enter.text = "FINISH!"
 
 
-        if(counter == 0){
-            val myIntent = Intent(this, Story::class.java)
-            myIntent.putExtra("inputs", words)
-            myIntent.putExtra("storyID", storyID) // pass the story ID to Story.kt in order to read files there
-            startActivityForResult(myIntent, REQ_CODE) // jump to the story page
+            if(counter == 0){
+                val myIntent = Intent(this, Story::class.java)
+                myIntent.putExtra("inputs", words)
+                myIntent.putExtra("storyID", storyID) // pass the story ID to Story.kt in order to read files there
+                startActivityForResult(myIntent, REQ_CODE) // jump to the story page
+            }
         }
     }
 }
