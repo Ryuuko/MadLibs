@@ -36,10 +36,10 @@ class Story : AppCompatActivity() {
         var story = builder.toString()
         // identify blanks
         val r = Regex("<.*?>")
-        val blanks = r.findAll(story).map { it.value }.distinct()
+        val blanks = r.findAll(story).map { it.value }
         var i: Int = 0
         for(blank in blanks){
-            story = story.replace(blank, inputs.get(i))
+            story = story.replaceFirst(blank, inputs.get(i))
             i++
         }
         story_text.text = "$story"

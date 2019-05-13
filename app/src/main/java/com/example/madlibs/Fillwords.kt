@@ -54,12 +54,15 @@ class Fillwords : AppCompatActivity() {
     }
 
     fun add_new_words(view: View){
-        if(new_words.text.toString().equals("")){
+
+        // trim out the goddamned whitespace and check whether it's empty
+        if(new_words.text.toString().isEmpty() || new_words.text.toString().trim().isEmpty()){
             val Toast = Toast.makeText(this, "Enter the word!", Toast.LENGTH_SHORT)
             Toast.show()
         }
         else{
-            val word = new_words.text.toString()
+            val word = new_words.text.toString().trim() // why don't we use trim() in our new added words? In case the user miss-add some
+                                                    // useless whitespace
             words.add(word)
             counter--
             new_words.setText(""); // clear the text bar whenever something is entered, recommand to be commented during debugging
