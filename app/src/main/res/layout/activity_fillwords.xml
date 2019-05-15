@@ -25,6 +25,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_margin="40sp"
+            android:padding="15sp"
             android:textSize="30sp"
             android:id="@+id/explain" android:paddingLeft="20sp" />
     <TextView

@@ -24,33 +24,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        story_menu.onItemSelectedListener = object : AdapterView.OnItemClickListener,
-            AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-
-                    Story_title = StoryArray.get(position)
-
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                // do nothing
-            }
-
-            override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                // do nothing
-            }
-
-        }
-        // getting the instance of spinner and apply OnItemSelectedListene
-//        story_menu.adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, StoryArray)
-
-
-
     }
 
 
     fun gameStartClick(view: View){
+
+        // change Story_title to the selected one
+        val index = story_menu.selectedItemPosition;
+        val Story_title = StoryArray[index];
+
         if (Story_title == "hints"){
             val Toast = Toast.makeText(this, "Choose a story !", Toast.LENGTH_SHORT)
             Toast.show()
